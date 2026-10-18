@@ -9,10 +9,12 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init("job_camada_bronze_notebook", {})
 
+# Inserir aqui a URI do S3 para as pastas bronze e input
 output_path = "s3://tech-challenge-513798489471/bronze/"
 base_input = "s3://tech-challenge-513798489471/input/"
 
 # 1. Leitura individual forçando o reconhecimento do cabeçalho (header="true")
+# Garanta que os nomes dos arquivos estão de acordo com o código abaixo
 df_2023 = spark.read.option("header", "true").option("delimiter", ",").csv(base_input + "State_of_data_2023.csv")
 df_2024 = spark.read.option("header", "true").option("delimiter", ",").csv(base_input + "State_of_data_2024.csv")
 df_2025 = spark.read.option("header", "true").option("delimiter", ",").csv(base_input + "State_of_data_2025.csv")
